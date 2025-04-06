@@ -1,8 +1,10 @@
 import React from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import Menu from '../components/Menu'
+import dynamic from 'next/dynamic'
 import { Container } from '@mui/material'
+
+const Menu = dynamic(() => import('../components/Menu'), { ssr: false })
 
 const theme = createTheme()
 
