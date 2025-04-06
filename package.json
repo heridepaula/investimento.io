@@ -10,7 +10,8 @@
     "vercel-build": "next build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sitemap": "next-sitemap"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
     "next": "^15.2.4",
+    "next-sitemap": "^4.2.3",
     "nextjs": "^0.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
