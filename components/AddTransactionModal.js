@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Modal,
-  Box,
-  Typography,
-  TextField,
-  MenuItem,
-  Button,
-} from '@mui/material'
+import { Modal, Box, TextField, Button } from '@mui/material'
+
+import SouthWestTwoToneIcon from '@mui/icons-material/SouthWestTwoTone'
+import NorthEastTwoToneIcon from '@mui/icons-material/NorthEastTwoTone'
 
 const AddTransactionModal = ({ open, onClose, onBackdropClick }) => {
   const [transaction, setTransaction] = useState({
@@ -22,7 +18,6 @@ const AddTransactionModal = ({ open, onClose, onBackdropClick }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(transaction)
     onClose()
   }
 
@@ -40,63 +35,154 @@ const AddTransactionModal = ({ open, onClose, onBackdropClick }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 400,
+          width: 'calc(100% - 32px)',
+          maxWidth: 500,
           bgcolor: 'background.paper',
           boxShadow: 24,
           p: 4,
           borderRadius: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <Typography
-          variant="h6"
-          component="h2"
-          gutterBottom
-          id="modal-add-transaction"
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
         >
-          Nova Transação
-        </Typography>
-        <Typography id="modal-description">
-          Adicione os detalhes da sua transação aqui.
-        </Typography>
-        <form onSubmit={handleSubmit}>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <TextField
+              fullWidth
+              label="Papel"
+              name="name"
+              value={transaction.name}
+              onChange={handleChange}
+            />
+            <TextField
+              fullWidth
+              label="Quantidade"
+              name="quantity"
+              type="number"
+              value={transaction.quantity || ''}
+              onChange={handleChange}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <TextField
+              fullWidth
+              label="Valor Unitário (R$)"
+              name="unitValue"
+              type="text"
+              value={transaction.unitValue || ''}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^\d]/g, '') || '0'
+                const formattedValue = (parseFloat(value) / 100).toLocaleString(
+                  'pt-BR',
+                  {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }
+                )
+                setTransaction((prev) => ({
+                  ...prev,
+                  unitValue: formattedValue,
+                }))
+              }}
+            />
+            <TextField
+              fullWidth
+              label="Valor Total (R$)"
+              name="totalValue"
+              type="text"
+              value={
+                !isNaN(transaction.quantity) &&
+                !isNaN(
+                  parseFloat(
+                    transaction.unitValue?.replace(/\./g, '').replace(',', '.')
+                  )
+                )
+                  ? (
+                      transaction.quantity *
+                      parseFloat(
+                        transaction.unitValue
+                          .replace(/\./g, '')
+                          .replace(',', '.')
+                      )
+                    ).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })
+                  : ''
+              }
+              InputProps={{
+                readOnly: true,
+              }}
+              disabled
+            />
+          </Box>
           <TextField
             fullWidth
-            margin="normal"
-            label="Nome"
-            name="name"
-            value={transaction.name}
+            label="Data da Transação"
+            name="date"
+            type="date"
+            value={transaction.date || new Date().toISOString().split('T')[0]}
             onChange={handleChange}
+            onFocus={(e) => e.target.showPicker && e.target.showPicker()}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Valor"
-            name="value"
-            type="number"
-            value={transaction.value}
-            onChange={handleChange}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            select
-            label="Tipo"
-            name="type"
-            value={transaction.type}
-            onChange={handleChange}
-          >
-            <MenuItem value="income">Receita</MenuItem>
-            <MenuItem value="expense">Despesa</MenuItem>
-          </TextField>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+            <Button
+              type="button"
+              variant={transaction.type === 'buy' ? 'contained' : 'outlined'}
+              color="success"
+              onClick={() =>
+                setTransaction((prev) => ({ ...prev, type: 'buy' }))
+              }
+              sx={{
+                flex: 1,
+                mr: 1,
+                height: 56,
+                fontSize: '1rem',
+                fontWeight: 'bold',
+              }}
+              startIcon={<SouthWestTwoToneIcon />}
+            >
+              Compra
+            </Button>
+            <Button
+              type="button"
+              variant={transaction.type === 'sell' ? 'contained' : 'outlined'}
+              color="error"
+              onClick={() =>
+                setTransaction((prev) => ({ ...prev, type: 'sell' }))
+              }
+              sx={{
+                flex: 1,
+                ml: 1,
+                height: 56,
+                fontSize: '1rem',
+                fontWeight: 'bold',
+              }}
+              startIcon={<NorthEastTwoToneIcon />}
+            >
+              Venda
+            </Button>
+          </Box>
           <Button
             type="submit"
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              fontSize: '1rem',
+              fontWeight: 'bold',
+            }}
           >
-            Adicionar
+            Confirmar
           </Button>
         </form>
       </Box>

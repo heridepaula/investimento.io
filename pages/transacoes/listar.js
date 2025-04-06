@@ -174,32 +174,32 @@ const TransactionsList = () => {
             />
           </Tooltip>
         </Grid>
+        <TableContainer component={Paper} style={{ marginBottom: '16px' }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Data de Transação</TableCell>
+                <TableCell>Papel</TableCell>
+                {!isMobile && <TableCell>Tipo</TableCell>}
+                {!isMobile && <TableCell>Valor Unitário</TableCell>}
+                {!isMobile && <TableCell>Quantidade</TableCell>}
+                <TableCell>Total da Transação</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{renderTableRows()}</TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+          component="div"
+          count={filteredTransactions.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Itens"
+        />
       </Grid>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Data de Transação</TableCell>
-              <TableCell>Papel</TableCell>
-              {!isMobile && <TableCell>Tipo</TableCell>}
-              {!isMobile && <TableCell>Valor Unitário</TableCell>}
-              {!isMobile && <TableCell>Quantidade</TableCell>}
-              <TableCell>Total da Transação</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{renderTableRows()}</TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
-        component="div"
-        count={filteredTransactions.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage="Itens"
-      />
     </Layout>
   )
 }
