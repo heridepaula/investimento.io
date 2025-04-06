@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://investimento.io
+
+# Sitemaps
+Sitemap: https://investimento.io/sitemap.xml
