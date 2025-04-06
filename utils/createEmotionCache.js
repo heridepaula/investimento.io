@@ -1,7 +1,7 @@
-import createCache from '@emotion/cache';
+import createCache from '@emotion/cache'
 
-const isBrowser = typeof document !== 'undefined';
+const isBrowser = typeof document !== 'undefined'
 
 export default function createEmotionCache() {
-  return createCache({ key: 'css', prepend: true });
+  return createCache({ key: 'css', prepend: true })
 }

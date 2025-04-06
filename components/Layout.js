@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Typography } from '@mui/material';
+import React from 'react'
+import { Container, Typography } from '@mui/material'
 
 const Layout = ({ children }) => {
   return (
@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       </Typography>
       <div>{children}</div>
     </Container>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

@@ -1,10 +1,10 @@
-import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Menu from '../components/Menu';
-import { Container } from '@mui/material';
+import React from 'react'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import Menu from '../components/Menu'
+import { Container } from '@mui/material'
 
-const theme = createTheme();
+const theme = createTheme()
 
 function App({ Component, pageProps }) {
   return (
@@ -15,7 +15,7 @@ function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </Container>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

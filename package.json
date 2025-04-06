@@ -7,8 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "vercel-build": "next build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write ."
   },
   "repository": {
@@ -29,6 +30,7 @@
   ],
   "author": "heridepaula@gmail.com",
   "license": "MIT",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/heridepaula/investimento.io/issues"
   },
