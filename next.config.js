@@ -6,13 +6,14 @@ module.exports = {
     return config
   },
   async headers() {
+    const isLocal = process.env.NODE_ENV === 'development'
     return [
       {
         source: '/(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: isLocal ? 'no-store' : 'public, max-age=31536000, immutable',
           },
         ],
       },

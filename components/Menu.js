@@ -3,8 +3,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
-  Button,
   Drawer,
   List,
   ListItem,
@@ -16,12 +14,16 @@ import {
   Box,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import HomeIcon from '@mui/icons-material/Home'
+import WalletIcon from '@mui/icons-material/Wallet'
 import Link from 'next/link'
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 
 const drawerWidth = 240
 
-const navItems = [{ text: 'Home', href: '/', icon: <HomeIcon /> }]
+const navItems = [
+  { text: 'Meu Portifólio', href: '/', icon: <WalletIcon /> },
+  { text: 'Transações', href: '/transacoes/listar', icon: <SwapHorizIcon /> },
+]
 
 function Menu({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -72,9 +74,6 @@ function Menu({ children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Minha App SPA
-          </Typography>
         </Toolbar>
       </AppBar>
       <Box
